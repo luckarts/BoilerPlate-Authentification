@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    networks:
+      gateway:
+         ipv4_address: 172.28.1.6
+    env_file: .env
+    environment:
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_USER=$MYSQL_USER
+      - DATABASE_HOST=$DATABASE_HOST
+  serveur:
+    build: ./serveur
+    networks:
+      gateway:
+          ipv4_address: 172.28.1.2
+    env_file: .env
+
+    environment:
+      - DATABASE_HOST=$DATABASE_HOST
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+
+    depends_on:
+      - db
+    restart: on-failure
+  client:
+    build: ./client
+    networks:
+      gateway:
+         ipv4_address: 172.28.1.3
+    depends_on:
+      - serveur
+
+networks:
+  gateway:
+      ipam:
+            driver: default
+            config:
+                - subnet: 172.28.0.0/16

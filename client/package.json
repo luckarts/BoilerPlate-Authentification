@@ -1,0 +1,44 @@
+{
+  "name": "Poker-School-Online-Front",
+  "version": "0.1.0",
+  "proxy": "http://localhost:5000/",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-router-redux": "^4.0.8",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-form": "^8.2.0",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
+    "styled-components": "^4.3.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "web": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "build": "webpack --mode development",
+    "dev": "webpack-dev-server",
+    "watch": "webpack --watch --mode development",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "css-loader": "^2.1.1",
+    "redux-devtools-extension": "^2.13.8",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
