@@ -6,8 +6,9 @@
   "scripts": {
     "test": "jest --runInBand ",
     "test:watch": "jest --watch ",
-    "start": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate &  babel-node ./src/index.js",
-    "build": "webpack --mode development"
+    "start-prod": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate &  babel-node ./src/index.js",
+    "start": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate & nodemon --exec ./src/index.js",
+    "build": "webpack --mode development && rm -rf ../serveur/public/* && mv public/* ../serveur/public/"
   },
   "author": "Luc Bachelerie",
   "dependencies": {
@@ -30,8 +31,6 @@
     "babel-loader": "^8.0.6",
     "eslint": "^5.16.0",
     "jest": "^24.8.0",
-    "nodemon": "^1.18.10",
-    "webpack": "^4.39.1",
-    "webpack-node-externals": "^1.7.2"
+    "nodemon": "^1.18.10"
   }
 }
