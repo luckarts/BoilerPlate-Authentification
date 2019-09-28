@@ -1,5 +1,8 @@
 import validate from "validate.js";
-import { ValidUserExist, CreateNewUser } from "../../Services/User/User_Services";
+import {
+    ValidUserExist,
+    CreateNewUser
+} from "../../Services/User/User_Services";
 
 export async function signup(req, res) {
     const contraints = {
@@ -30,10 +33,14 @@ export async function signup(req, res) {
 
     if (found_User) {
         if (email === found_User.email) {
-            return res.status(400).json({ "error": `email: ${email}  already taken ` });
+            return res
+                .status(400)
+                .json({ "error": `email: ${email}  already taken ` });
         }
         if (username === found_User.username) {
-            return res.status(400).json({ "error": `firstname : ${username} already taken` });
+            return res
+                .status(400)
+                .json({ "error": `firstname : ${username} already taken` });
         }
     }
 
@@ -43,5 +50,7 @@ export async function signup(req, res) {
         email
     });
 
-    return res.status(200).json({ "message": "User has been signed up !", new_User });
+    return res
+        .status(200)
+        .json({ "message": "User has been signed up !", new_User });
 }

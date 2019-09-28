@@ -1,4 +1,8 @@
-import { UsernameExist, EmailExist, CreateUser } from "../../Services/User/User_DB";
+import {
+    UsernameExist,
+    EmailExist,
+    CreateUser
+} from "../../Services/User/User_DB";
 import db from "../../Database/models";
 
 describe("User Test", () => {

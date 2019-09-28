@@ -1,0 +1,24 @@
+sudo: false
+language: node_js
+services:
+  - mysql
+node_js:
+- '8'
+branches:
+  only:
+  - /^v\d+\.\d+\.\d+$/
+cache:
+  directories:
+  - serveur/node_modules
+before_install:
+- cd serveur/
+- mysql -e 'CREATE DATABASE test;'
+install:
+- npm ci
+before_script:
+- npm install -g sequelize-cli
+- sequelize db:migrate
+script:
+- npm test
+notification:
+  email:false

@@ -49,7 +49,6 @@ export async function CreateUser(args) {
         "username": args.username,
         "password": args.password,
         "email": args.email
-
     });
 
     return user;

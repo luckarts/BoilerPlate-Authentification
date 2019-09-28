@@ -9,7 +9,8 @@
     "start-prod": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate &  babel-node ./src/index.js",
     "init_Db": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate",
     "start": "nodemon --exec babel-node ./src/index.js",
-    "coveralls": "jest --coverage && cat ./tests/coverage/lcov.info | coveralls"
+    "lint": "eslint '**/*.js'",
+    "lint:fix": "prettier-eslint --write '**/*.js'"
   },
   "author": "Luc Bachelerie",
   "dependencies": {
@@ -24,18 +25,20 @@
     "validate.js": "^0.13.1"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.6.0",
-    "@babel/polyfill": "^7.6.0",
-    "@babel/runtime": "^7.6.0",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.2.2",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/polyfill": "^7.6.0",
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.4.4",
+    "@babel/runtime": "^7.6.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
     "eslint": "^5.16.0",
     "jest": "^24.8.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "prettier-eslint": "^9.0.0",
+    "prettier-eslint-cli": "^5.0.0"
   }
 }
