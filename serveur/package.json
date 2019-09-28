@@ -7,7 +7,8 @@
     "test": "jest --runInBand ",
     "test:watch": "jest --watch ",
     "start-prod": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate &  babel-node ./src/index.js",
-    "start": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate & nodemon --exec babel-node ./src/index.js"
+    "init_Db":"babel-node ./script/createDb.js & npx sequelize-cli db:migrate",
+    "start": "nodemon --exec babel-node ./src/index.js"
   },
   "author": "Luc Bachelerie",
   "dependencies": {
@@ -18,7 +19,8 @@
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
-    "sequelize": "^5.8.7"
+    "sequelize": "^5.8.7",
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",

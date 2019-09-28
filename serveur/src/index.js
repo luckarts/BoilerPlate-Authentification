@@ -3,6 +3,9 @@ import migration from "./Database/models";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import dotenv from "dotenv";
+
+import auth_Routes from "./API/User/auth_Routes";
+
 dotenv.config();
 const app = express();
 // Log all requests to file, but errors to console
@@ -24,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use(express.static(`${process.cwd()}/public`));
 
+app.use("/user", auth_Routes);
 // error handler
 app.use((req, res, next) => {
     let err = new Error("Not Found");
