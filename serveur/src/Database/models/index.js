@@ -1,4 +1,4 @@
-import connection from "../database/connection";
+import connection from "../connection";
 import fs from "fs";
 import path from "path";
 

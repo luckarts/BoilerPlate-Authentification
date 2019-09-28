@@ -1,5 +1,5 @@
 import express from "express";
-import migration from "./db";
+import migration from "./Database/models";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import dotenv from "dotenv";
@@ -21,9 +21,8 @@ app.use((req, res, next) => {
 });
 
 // Index Route
-app.get("/", (req, res) => {
-    res.sendFile(`${process.cwd()}/public/index.html`);
-});
+
+app.use(express.static(`${process.cwd()}/public`));
 
 // error handler
 app.use((req, res, next) => {

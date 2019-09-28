@@ -7,8 +7,7 @@
     "test": "jest --runInBand ",
     "test:watch": "jest --watch ",
     "start-prod": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate &  babel-node ./src/index.js",
-    "start": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate & nodemon --exec ./src/index.js",
-    "build": "webpack --mode development && rm -rf ../serveur/public/* && mv public/* ../serveur/public/"
+    "start": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate & nodemon --exec babel-node ./src/index.js"
   },
   "author": "Luc Bachelerie",
   "dependencies": {
