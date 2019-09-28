@@ -4,7 +4,7 @@
   "description": "Serveur Poker School Online",
   "main": "index.js",
   "scripts": {
-    "test": "jest --runInBand ",
+    "test": "jest ----forceExit ",
     "test:watch": "jest --watch ",
     "start-prod": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate &  babel-node ./src/index.js",
     "init_Db": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate",

@@ -1,11 +1,25 @@
-import {
-    UsernameExist,
-    EmailExist,
-    CreateUser
-} from "../../Services/User/User_DB";
+import { UsernameExist, EmailExist, CreateUser } from "../../Services/User/User_DB";
 import db from "../../Database/models";
 
+async function Createusers() {
+    return await db.User.create({
+        "username": "test",
+        "password": "test",
+        "email": "test@test.com"
+    });
+}
+async function DestroyUser(user) {
+    user.destroy({ "where": {}, "force": true });
+}
+
 describe("User Test", () => {
+    beforeAll((done) => {
+        db.User.destroy({
+            "where": {},
+            "truncate": { "cascade": true }
+        });
+        done();
+    });
     it("should see if user already exist in DB", async () => {
         const check = await UsernameExist("");
 
@@ -14,6 +28,8 @@ describe("User Test", () => {
     it("Throw an error because no username was passed", async () => {
         try {
             const check = await UsernameExist("");
+
+            expect(check).toBe(null);
         } catch (e) {
             expect(e.message).toMatch("no username was passed on db ");
         }
@@ -36,6 +52,8 @@ describe("User Test", () => {
     it("Throw an error because no email was passed", async () => {
         try {
             const check = await EmailExist();
+
+            expect(check).toBe(null);
         } catch (e) {
             expect(e.message).toMatch("no email was passed on db ");
         }
@@ -75,13 +93,3 @@ describe("User Test", () => {
         }
     });
 });
-async function Createusers() {
-    return await db.User.create({
-        "username": "test",
-        "password": "test",
-        "email": "test@test.com"
-    });
-}
-async function DestroyUser(user) {
-    user.destroy({ "where": {}, "force": true });
-}

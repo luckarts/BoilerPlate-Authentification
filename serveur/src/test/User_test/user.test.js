@@ -1,5 +1,17 @@
 import db from "../../Database/models";
 import { ValidUserExist } from "../../Services/User/User_Services";
+
+async function CreateUser() {
+    return await db.User.create({
+        "username": "test",
+        "password": "test",
+        "email": "test@test.com"
+    });
+}
+async function DestroyUser(user) {
+    user.destroy({ "where": {}, "force": true });
+}
+
 describe("User Test", () => {
     it("should see if user already exist ", async () => {
         const user = await ValidUserExist("test", "test@test.com");
@@ -25,13 +37,3 @@ describe("User Test", () => {
         }
     });
 });
-async function CreateUser() {
-    return await db.User.create({
-        "username": "test",
-        "password": "test",
-        "email": "test@test.com"
-    });
-}
-async function DestroyUser(user) {
-    user.destroy({ "where": {}, "force": true });
-}
