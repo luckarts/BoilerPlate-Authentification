@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "web": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-    "build": "webpack --mode development && rm -rf ../serveur/public/* && mv public/* ../serveur/public/",
+    "build": "webpack --mode development && rm -rf ../serveur/public/* && cp dist/* ../serveur/public/",
     "dev": "webpack-dev-server",
     "watch": "webpack --watch --mode development",
     "eject": "react-scripts eject"
