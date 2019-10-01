@@ -1,11 +1,12 @@
-import db from "../../Database/models";
 import { ValidUserExist } from "../../Services/User/User_Services";
+import db from "../../Database/models";
 
 async function CreateUser() {
     return await db.User.create({
         "username": "test",
         "password": "test",
-        "email": "test@test.com"
+        "email": "test@test.com",
+        "PermissionId": 1
     });
 }
 async function DestroyUser(user) {
@@ -13,7 +14,7 @@ async function DestroyUser(user) {
 }
 
 describe("User Test", () => {
-    it("should see if user already exist ", async () => {
+    it("should see if user already exist with valid email", async () => {
         const user = await ValidUserExist("test", "test@test.com");
 
         expect(user).toBe(null);
@@ -25,7 +26,7 @@ describe("User Test", () => {
         await DestroyUser(test);
         expect(typeof check === "object").toBe(true);
     });
-    it("should see if user already exist and fail", async () => {
+    it("should throw an error because", async () => {
         try {
             const check = await ValidUserExist();
             const test = await CreateUser();

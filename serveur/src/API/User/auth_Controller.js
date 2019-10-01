@@ -1,8 +1,5 @@
 import validate from "validate.js";
-import {
-    ValidUserExist,
-    CreateNewUser
-} from "../../Services/User/User_Services";
+import { ValidUserExist, CreateNewUser } from "../../Services/User/User_Services";
 
 export async function signup(req, res) {
     const contraints = {
@@ -23,7 +20,7 @@ export async function signup(req, res) {
         }
     };
 
-    const { username, password, email } = req.body;
+    const { username, password, email, PermissionId } = req.body;
     const validation = validate({ username, password, email }, contraints);
 
     if (validation) {
@@ -33,24 +30,14 @@ export async function signup(req, res) {
 
     if (found_User) {
         if (email === found_User.email) {
-            return res
-                .status(400)
-                .json({ "error": `email: ${email}  already taken ` });
+            return res.status(400).json({ "error": `email: ${email}  already taken ` });
         }
         if (username === found_User.username) {
-            return res
-                .status(400)
-                .json({ "error": `firstname : ${username} already taken` });
+            return res.status(400).json({ "error": `firstname : ${username} already taken` });
         }
     }
 
-    const new_User = await CreateNewUser({
-        username,
-        password,
-        email
-    });
+    const new_User = await CreateNewUser({ username, password, email, PermissionId });
 
-    return res
-        .status(200)
-        .json({ "message": "User has been signed up !", new_User });
+    return res.status(200).json({ "message": "User has been signed up !", new_User });
 }

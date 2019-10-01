@@ -18,6 +18,7 @@ export async function UsernameExist(username) {
     return null;
 }
 // function to check if email already existe in db
+
 export async function EmailExist(email) {
     if (email === undefined || email === null) {
         throw new Error("no email was passed on db ");
@@ -33,6 +34,18 @@ export async function EmailExist(email) {
 
     return null;
 }
+
+// Select * from Permission where i = 1 Limit 1
+export async function ValidePermissionId(PermissionId) {
+    const permission = db.Permission.findOne({ "where": { "id": PermissionId } });
+
+    if (permission) {
+        return permission;
+    }
+
+    return null;
+}
+
 // Select * from Permission where i = 1 Limit 1
 
 export async function CreateUser(args) {
@@ -45,10 +58,19 @@ export async function CreateUser(args) {
     if (!args.password) {
         throw new Error("invalid argument password");
     }
+    if (!args.PermissionId) {
+        args.PermissionId = 2;
+    }
+    const permission = await ValidePermissionId(args.PermissionId);
+
+    if (!permission) {
+        throw new Error("permission not find");
+    }
     const user = await db.User.create({
         "username": args.username,
         "password": args.password,
-        "email": args.email
+        "email": args.email,
+        "PermissionId": args.PermissionId
     });
 
     return user;

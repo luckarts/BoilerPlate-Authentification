@@ -8,26 +8,20 @@ module.exports = {
                 "type": Sequelize.INTEGER
             },
             "username": {
-                "type": Sequelize.STRING(),
-                "allowNull": false,
-                "required": true
+                "type": Sequelize.STRING
             },
             "password": {
-                "type": Sequelize.STRING(),
-                "allowNull": false,
-                "required": true
+                "type": Sequelize.STRING
             },
             "email": {
-                "type": Sequelize.STRING(),
-                "allowNull": false,
-                "lowercase": true,
-                "trim": true,
-                "unique": true,
-                "required": true
+                "type": Sequelize.STRING
+            },
+            "PermissionId": {
+                "type": Sequelize.INTEGER
             }
         });
     },
-    "down": (queryInterface, Sequelize) => {
+    "down": (queryInterface) => {
         return queryInterface.dropTable("Users");
     }
 };

@@ -7,7 +7,7 @@
     "test": "jest ----forceExit ",
     "test:watch": "jest --watch ",
     "start-prod": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate &  babel-node ./src/index.js",
-    "init_Db": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate",
+    "init_Db": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate && $ npx sequelize-cli db:seed:all",
     "start": "nodemon --exec babel-node ./src/index.js",
     "lint": "eslint '**/*.js'",
     "lint:fix": "prettier-eslint --write '**/*.js'"

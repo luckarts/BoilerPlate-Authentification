@@ -1,5 +1,3 @@
-"strict user";
-
 export default (connection, DataTypes) => {
     const User = connection.define("User", {
         "id": {
@@ -28,5 +26,10 @@ export default (connection, DataTypes) => {
         }
     });
 
+    User.associate = (models) => {
+        User.belongsTo(models.Permission);
+
+        // associations can be defined here
+    };
     return User;
 };
