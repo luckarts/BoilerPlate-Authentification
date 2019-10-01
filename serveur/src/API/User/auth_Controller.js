@@ -1,5 +1,5 @@
 import validate from "validate.js";
-import { ValidUserExist, CreateNewUser } from "../../Services/User/User_Services";
+import { ValidUserExist, CreateNewUser, generateJWT } from "../../Services/User/User_Services";
 
 export async function signup(req, res) {
     const contraints = {
@@ -20,12 +20,20 @@ export async function signup(req, res) {
         }
     };
 
+    /*
+Check data send by User .
+Return message Error if object is empty or specification are not valid
+ */
     const { username, password, email, PermissionId } = req.body;
     const validation = validate({ username, password, email }, contraints);
 
     if (validation) {
         return res.status(400).json({ "error": validation });
     }
+
+    /*
+If Validation is true Call ValidUserExist if user already exist
+ */
     const found_User = await ValidUserExist(username, email);
 
     if (found_User) {
@@ -37,7 +45,12 @@ export async function signup(req, res) {
         }
     }
 
+    /*
+If user did'nt exist create user
+Return user with hash password and jwt
+ */
+    const token = generateJWT(req.body);
     const new_User = await CreateNewUser({ username, password, email, PermissionId });
 
-    return res.status(200).json({ "message": "User has been signed up !", new_User });
+    return res.status(200).json({ "message": "User has been signed up !", new_User, token });
 }

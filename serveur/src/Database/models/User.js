@@ -1,3 +1,6 @@
+import bcrypt from "bcrypt";
+const Salt_Factor = 10;
+
 export default (connection, DataTypes) => {
     const User = connection.define("User", {
         "id": {
@@ -26,10 +29,51 @@ export default (connection, DataTypes) => {
         }
     });
 
+    // Will also add PermissionID to User model
     User.associate = (models) => {
         User.belongsTo(models.Permission);
-
-        // associations can be defined here
     };
+
+    /*
+Function crypt password.
+Returns hash password .
+ */
+
+    function cryptPassword(password) {
+        return new Promise((resolve, reject) => {
+            bcrypt.genSalt(10, (err) => {
+                // Encrypt password using bycrpt module
+                if (err) {
+                    return reject(err);
+                }
+
+                bcrypt.hash(password, Salt_Factor).then((hash) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    return resolve(hash);
+                });
+            });
+        });
+    }
+
+    /* Node is single threaded + Bcrypt is slow => This will make the server unresponsive for the duration of
+     the synchronous functions.  */
+    // Method before create user replace crypte password
+
+    if (process.env.NODE_ENV !== "test") {
+        User.addHook("beforeCreate", (user) => {
+            return cryptPassword(user.dataValues.password)
+                .then((success) => {
+                    user.password = success;
+                })
+                .catch((err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+        });
+    }
+
     return User;
 };

@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         {}
     );
+    // Will also add PermissionID to User model
 
     Permission.associate = function(models) {
         Permission.hasMany(models.User);
-        // associations can be defined here
     };
 
     return Permission;

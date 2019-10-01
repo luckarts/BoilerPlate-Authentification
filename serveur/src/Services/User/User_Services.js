@@ -1,4 +1,12 @@
 import { UsernameExist, EmailExist, CreateUser } from "./User_DB";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+
+/*
+Function checks if Email user already exists in database.
+Returns user if this user already exist.
+ */
 
 export async function ValidUserExist(username, email) {
     if (!username) {
@@ -28,4 +36,15 @@ export async function ValidUserExist(username, email) {
 
 export async function CreateNewUser(args) {
     return await CreateUser(args);
+}
+/*
+Function create token .
+ */
+export function generateJWT(user) {
+    return jwt.sign(
+        {
+            user
+        },
+        process.env.JWT_SECRET
+    );
 }

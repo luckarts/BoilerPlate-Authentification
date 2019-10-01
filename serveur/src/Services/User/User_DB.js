@@ -1,7 +1,9 @@
 import db from "../../Database/models";
 
-// function to check if firstname already existe in db
-
+/*
+Function checks if username already exists in database.
+Returns user if username already taken.
+ */
 export async function UsernameExist(username) {
     if (username === undefined || username === null) {
         throw new Error("no username was passed on db ");
@@ -17,7 +19,11 @@ export async function UsernameExist(username) {
 
     return null;
 }
-// function to check if email already existe in db
+
+/*
+Function checks if Email already exists in database.
+Returns user if email already taken.
+ */
 
 export async function EmailExist(email) {
     if (email === undefined || email === null) {
@@ -36,6 +42,7 @@ export async function EmailExist(email) {
 }
 
 // Select * from Permission where i = 1 Limit 1
+
 export async function ValidePermissionId(PermissionId) {
     const permission = db.Permission.findOne({ "where": { "id": PermissionId } });
 
@@ -46,7 +53,10 @@ export async function ValidePermissionId(PermissionId) {
     return null;
 }
 
-// Select * from Permission where i = 1 Limit 1
+/*
+Function checks create User in database.
+Returns user .
+ */
 
 export async function CreateUser(args) {
     if (!args.username) {

@@ -8,8 +8,8 @@ import auth_Routes from "./API/User/auth_Routes";
 
 dotenv.config();
 const app = express();
-// Log all requests to file, but errors to console
 
+// Log all requests to file, but errors to console
 app.use(morgan("dev"));
 
 app.use(bodyParser.urlencoded({ "extended": false }));
