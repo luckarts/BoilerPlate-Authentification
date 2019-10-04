@@ -1,6 +1,6 @@
 import validate from "validate.js";
 import { ValidUserExist, CreateNewUser, generateJWT } from "../../Services/User/User_Services";
-
+import { DeleteUserID } from "../../Services/User/User_DB";
 export async function signup(req, res) {
     const contraints = {
         "username": {
@@ -53,4 +53,27 @@ Return user with hash password and jwt
     const new_User = await CreateNewUser({ username, password, email, PermissionId });
 
     return res.status(200).json({ "message": "User has been signed up !", new_User, token });
+}
+/*
+Function delete User with username as params
+ */
+export async function deleteUser(req, res) {
+    const contraints = {
+        "username": {
+            "presence": {
+                "message": "Veuillez saisir votre pseudo"
+            },
+
+            "length": { "maximum": 50 }
+        }
+    };
+    const username = req.params.username;
+    const validation = validate({ username }, contraints);
+
+    if (validation) {
+        return res.status(400).json({ "error": validation });
+    }
+    console.log("test");
+    await DeleteUserID(username);
+    return res.status(200).json({ "message": "User has been delete!" });
 }

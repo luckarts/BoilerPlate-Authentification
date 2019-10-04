@@ -50,6 +50,4 @@ migration.connection
     .then(() => console.log("database connected..."))
     .catch((err) => console.log(`Error:${err}`));
 
-const server = app.listen(process.env.NODE_PORT || 8080, () => {
-    console.log(`Listening on port ${server.address().port}`);
-});
+export default app;

@@ -85,3 +85,18 @@ export async function CreateUser(args) {
 
     return user;
 }
+/*
+Function delete User with username as params
+ */
+export async function DeleteUserID(username) {
+    if (!username) {
+        throw new Error("invalid argument: id");
+    }
+    const user = await db.User.destroy({
+        "where": {
+            username
+        }
+    });
+
+    return null;
+}

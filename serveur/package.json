@@ -6,9 +6,9 @@
   "scripts": {
     "test": "jest ----forceExit ",
     "test:watch": "jest --watch ",
-    "start-prod": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate &  babel-node ./src/index.js",
-    "init_Db": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate && $ npx sequelize-cli db:seed:all",
-    "start": "nodemon --exec babel-node ./src/index.js",
+    "start-prod": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate &  babel-node ./src/start.js",
+    "init_Db": "babel-node ./script/createDb.js & npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "start": "nodemon --exec babel-node ./src/start.js",
     "lint": "eslint '**/*.js'",
     "lint:fix": "prettier-eslint --write '**/*.js'"
   },
@@ -41,6 +41,7 @@
     "jest": "^24.8.0",
     "nodemon": "^1.18.10",
     "prettier-eslint": "^9.0.0",
-    "prettier-eslint-cli": "^5.0.0"
+    "prettier-eslint-cli": "^5.0.0",
+    "supertest": "^4.0.2"
   }
 }

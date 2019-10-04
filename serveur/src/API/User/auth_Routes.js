@@ -1,6 +1,6 @@
 import express from "express";
 import { asyncHandler } from "../../helpers/asyncHandler";
-import { signup } from "./auth_Controller";
+import { signup, deleteUser } from "./auth_Controller";
 
 const router = express.Router();
 
@@ -9,5 +9,5 @@ router.get("/", (req, res) => {
 });
 
 router.post("/signup", asyncHandler(signup));
-
+router.delete("/delete/:username", asyncHandler(deleteUser));
 export default router;
