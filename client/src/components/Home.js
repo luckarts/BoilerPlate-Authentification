@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Navbar from '../components/Navbar';
+import React, { Component } from "react";
+import Navbar from "../components/Navbar";
 
 class Home extends Component {
   constructor(props) {
