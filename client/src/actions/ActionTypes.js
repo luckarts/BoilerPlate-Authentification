@@ -1,0 +1,2 @@
+export const CREATE_USER_REQUEST = "CREATE_USER_REQUEST";
+export const USER_LOGGED_IN = "USER_LOGGED_IN";
