@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default {
   user: {
-    signup: user => axios.post("/user/signup", user).then(res => res.data)
-  }
+    signup: user => axios.post('api/users/signup', user).then(res => res.data),
+  },
 };

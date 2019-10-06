@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createUserRequest } from '../actions/index';
 import { validate } from '../components/validate';
 import Container from '../style-component/FormStyle';
+
 class Register extends Component {
   constructor() {
     super();
@@ -12,10 +13,11 @@ class Register extends Component {
       errors: {},
     };
   }
-
+  componentWillReceiveProps(nextProps) {
+    this.setState({ errors: nextProps.serverErrors });
+  }
   renderInputField(field) {
     const className = `form-input ${field.meta.touched && field.meta.error ? 'has-error' : ''}`;
-
     return (
       <div className={className}>
         <input
@@ -24,19 +26,18 @@ class Register extends Component {
           {...field.input}
           placeholder={field.placeholder}
         />
-        {field.meta.touched && <p className="text-danger">{field.meta.error}</p>}
+        {field.meta.touched && <p className="text-danger">{field.meta.error || field.errors}</p>}
       </div>
     );
   }
 
   onSubmit(values) {
-    console.log(values);
     this.props.createUserRequest(values);
   }
 
   render() {
-    const { error } = this.props;
-    console.log(error);
+    const { errors } = this.state;
+
     return (
       <div>
         <Container>
@@ -53,6 +54,7 @@ class Register extends Component {
               name="username"
               placeholder="username"
               component={this.renderInputField}
+              errors={errors.username}
             />
 
             <Field
@@ -73,7 +75,7 @@ class Register extends Component {
               component={this.renderInputField}
             />
 
-            <button type="submit">Sign In</button>
+            <button type="submit">SignUp</button>
           </form>
         </Container>
       </div>
@@ -82,7 +84,7 @@ class Register extends Component {
 }
 
 const mapStateToProps = state => ({
-  state,
+  serverErrors: state.formErrors.errors,
 });
 export default reduxForm({ form: 'Register', validate })(
   connect(
