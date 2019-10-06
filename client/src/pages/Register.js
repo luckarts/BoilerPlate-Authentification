@@ -3,11 +3,14 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { createUserRequest } from '../actions/index';
-
+import { validate } from '../components/validate';
+import Container from '../style-component/FormStyle';
 class Register extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      errors: {},
+    };
   }
 
   renderInputField(field) {
@@ -21,53 +24,58 @@ class Register extends Component {
           {...field.input}
           placeholder={field.placeholder}
         />
+        {field.meta.touched && <p className="text-danger">{field.meta.error}</p>}
       </div>
     );
   }
 
   onSubmit(values) {
+    console.log(values);
     this.props.createUserRequest(values);
   }
 
   render() {
+    const { error } = this.props;
+    console.log(error);
     return (
       <div>
-        <h1>Register</h1>
-
-        <form
-          autoComplete="off"
-          onSubmit={this.props.handleSubmit(e => {
-            this.onSubmit(e);
-          })}
-        >
-          <Field
-            type="text"
-            myLabel="username"
-            name="username"
-            placeholder="username"
-            component={this.renderInputField}
-          />
-
-          <Field
-            autoComplete="password"
-            type="password"
-            myLabel="password"
-            name="password"
-            placeholder="password"
-            component={this.renderInputField}
-          />
-
-          <Field
+        <Container>
+          <h1>Register</h1>
+          <form
             autoComplete="off"
-            type="email"
-            myLabel="email"
-            name="email"
-            placeholder="email"
-            component={this.renderInputField}
-          />
+            onSubmit={this.props.handleSubmit(e => {
+              this.onSubmit(e);
+            })}
+          >
+            <Field
+              type="text"
+              myLabel="username"
+              name="username"
+              placeholder="username"
+              component={this.renderInputField}
+            />
 
-          <button type="submit">Sign In</button>
-        </form>
+            <Field
+              autoComplete="password"
+              type="password"
+              myLabel="password"
+              name="password"
+              placeholder="password"
+              component={this.renderInputField}
+            />
+
+            <Field
+              autoComplete="off"
+              type="email"
+              myLabel="email"
+              name="email"
+              placeholder="email"
+              component={this.renderInputField}
+            />
+
+            <button type="submit">Sign In</button>
+          </form>
+        </Container>
       </div>
     );
   }
@@ -76,7 +84,7 @@ class Register extends Component {
 const mapStateToProps = state => ({
   state,
 });
-export default reduxForm({ form: 'Register' })(
+export default reduxForm({ form: 'Register', validate })(
   connect(
     mapStateToProps,
     { createUserRequest }
