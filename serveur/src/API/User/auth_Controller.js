@@ -1,9 +1,5 @@
 import validate from "validate.js";
-import {
-    ValidUserExist,
-    CreateNewUser,
-    generateJWT
-} from "../../Services/User/User_Services";
+import { ValidUserExist, CreateNewUser, generateJWT } from "../../Services/User/User_Services";
 import { DeleteUserID } from "../../Services/User/User_DB";
 export async function signup(req, res) {
     const contraints = {
@@ -42,14 +38,10 @@ If Validation is true Call ValidUserExist if user already exist
 
     if (found_User) {
         if (email === found_User.email) {
-            return res
-                .status(400)
-                .json({ "error": `email: ${email}  already taken ` });
+            return res.status(400).json({ "error": { "email": [ `${email}  already taken` ] } });
         }
         if (username === found_User.username) {
-            return res
-                .status(400)
-                .json({ "error": `firstname : ${username} already taken` });
+            return res.status(400).json({ "error": { "username": [ `${username} already taken` ] } });
         }
     }
 
@@ -65,9 +57,7 @@ Return user with hash password and jwt
         PermissionId
     });
 
-    return res
-        .status(200)
-        .json({ "message": "User has been signed up !", new_User, token });
+    return res.status(200).json({ "message": "User has been signed up !", new_User, token });
 }
 /*
 Function delete User with username as params
@@ -88,7 +78,7 @@ export async function deleteUser(req, res) {
     if (validation) {
         return res.status(400).json({ "error": validation });
     }
-    console.log("test");
+
     await DeleteUserID(username);
     return res.status(200).json({ "message": "User has been delete!" });
 }
