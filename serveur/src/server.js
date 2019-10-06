@@ -27,7 +27,8 @@ app.use((req, res, next) => {
 
 app.use(express.static(`${process.cwd()}/public`));
 
-app.use("/user", auth_Routes);
+app.use("/api/users", auth_Routes);
+
 // error handler
 app.use((req, res, next) => {
     let err = new Error("Not Found");
@@ -44,7 +45,7 @@ app.use((err, req, res) => {
     });
 });
 
-// Connect & create tables if not already exist
+// Connect to Database
 migration.connection
     .authenticate()
     .then(() => console.log("database connected..."))
