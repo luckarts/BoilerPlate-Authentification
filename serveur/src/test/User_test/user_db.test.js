@@ -1,4 +1,8 @@
-import { UsernameExist, EmailExist, CreateUser } from "../../Services/User/User_DB";
+import {
+    UsernameExist,
+    EmailExist,
+    CreateUser
+} from "../../Services/User/User_DB";
 import db from "../../Database/models";
 
 async function Createusers() {
@@ -97,7 +101,12 @@ describe("User Test", () => {
             const password = "test";
             const email = "test@test.com";
             const PermissionId = "erff";
-            const user = await CreateUser({ username, password, email, PermissionId });
+            const user = await CreateUser({
+                username,
+                password,
+                email,
+                PermissionId
+            });
 
             await DestroyUser(user);
         } catch (e) {
@@ -109,7 +118,12 @@ describe("User Test", () => {
         const password = "test";
         const email = "test@test.com";
         const PermissionId = 1;
-        const user = await CreateUser({ username, password, email, PermissionId });
+        const user = await CreateUser({
+            username,
+            password,
+            email,
+            PermissionId
+        });
 
         await DestroyUser(user);
         expect(typeof user === "object").toBe(true);
