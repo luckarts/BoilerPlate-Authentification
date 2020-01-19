@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
-import Nav from "../style-component/NavStyle";
-
+import "./style.scss";
 class Navbars extends Component {
   constructor(props) {
     super(props);
@@ -11,9 +9,9 @@ class Navbars extends Component {
 
   render() {
     return (
-      <Nav>
-        <a href="/">Poker School Online</a>
-      </Nav>
+      <nav>
+        <a href="/">Authentification</a>
+      </nav>
     );
   }
 }

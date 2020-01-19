@@ -34,6 +34,15 @@ module.exports = {
       }
     ]
   },
+  resolve: {
+    extensions: [".js", ".jsx", ".json"],
+    alias: {
+      root: [path.resolve(__dirname, "src"), path.resolve(__dirname, "node_modules")],
+      components: path.resolve(__dirname, "./src/components"),
+      views: path.resolve(__dirname, "./src/views"),
+      store: path.resolve(__dirname, "./src/store")
+    }
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html",

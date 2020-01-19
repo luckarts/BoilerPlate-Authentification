@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import reducers from './reducers';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import reducers from "./store/reducers";
+import { composeWithDevTools } from "redux-devtools-extension";
 
-import createSagaMiddleware from 'redux-saga';
-import rootSaga from './saga/rootSaga';
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./store/saga/rootSaga";
 
-import Register from './pages/Register';
+import Router from "./Router";
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -21,7 +21,7 @@ sagaMiddleware.run(rootSaga);
 // render the application
 ReactDOM.render(
   <Provider store={store}>
-    <Register />
+    <Router />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

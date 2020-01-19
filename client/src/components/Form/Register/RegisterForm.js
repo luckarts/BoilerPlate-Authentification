@@ -1,10 +1,10 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import { createUserRequest } from '../../actions/index';
-import { validate } from '../../components/validate';
-
-import ReduxformInput from '../../components/ReduxformInput';
+import React from "react";
+import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { createUserRequest } from "../../../store/actions/index";
+import { validate } from "./validate";
+import "./style.scss";
+import ReduxformInput from "../ReduxformInput/ReduxformInput";
 
 const RegisterForm = props => {
   const onSubmit = values => {
@@ -48,9 +48,9 @@ const RegisterForm = props => {
   );
 };
 const mapStateToProps = state => ({
-  serverErrors: state.formErrors,
+  serverErrors: state.formErrors
 });
-export default reduxForm({ form: 'Register', validate })(
+export default reduxForm({ form: "Register", validate })(
   connect(
     mapStateToProps,
     { createUserRequest }

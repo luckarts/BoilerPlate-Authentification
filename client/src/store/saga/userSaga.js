@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import api from '../API/api';
+import api from '../../API/api';
 import { userLoggedIn } from '../actions/auth';
 import { createUserErrors } from '../actions/index';
 // worker Saga: will be fired on userLoggedIn actions
