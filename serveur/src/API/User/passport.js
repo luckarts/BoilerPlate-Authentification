@@ -1,12 +1,13 @@
 import { UserSearch } from '../../Services/User/User_Services';
 import bcrypt from 'bcrypt';
-import passport from 'passport';
+import jwt from 'jsonwebtoken';
+import validate from 'validate.js';
 
+const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 
 passport.use(
     new LocalStrategy(function (username, password, done) {
-
         UserSearch(username)
             .then((user, err) => {
                 if (err) {

@@ -1,14 +1,14 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { createUserRequest } from "../../../store/actions/index";
+import { loginUserRequest } from "store/actions";
 import { validate } from "../validate";
 import "./style.scss";
 import ReduxformInput from "../ReduxformInput/ReduxformInput";
 
-const RegisterForm = props => {
+const LoginForm = props => {
   const onSubmit = values => {
-    props.createUserRequest(values);
+    props.loginUserRequest(values);
   };
 
   const { serverErrors, handleSubmit } = props;
@@ -33,16 +33,6 @@ const RegisterForm = props => {
         errors={serverErrors.errors.password}
       />
 
-      <Field
-        autoComplete="off"
-        type="email"
-        myLabel="email"
-        name="email"
-        placeholder="email"
-        component={ReduxformInput}
-        errors={serverErrors.errors.email}
-      />
-
       <button type="submit">SignUp</button>
     </form>
   );
@@ -53,6 +43,6 @@ const mapStateToProps = state => ({
 export default reduxForm({ form: "Register", validate })(
   connect(
     mapStateToProps,
-    { createUserRequest }
-  )(RegisterForm)
+    { loginUserRequest }
+  )(LoginForm)
 );

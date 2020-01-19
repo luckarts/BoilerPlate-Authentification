@@ -13,3 +13,14 @@ export function* createUserSaga(action) {
     yield put(createUserErrors(err.response.data.error));
   }
 }
+export function* loginUserSaga(action) {
+  try {
+    console.log(action, 'loginSaga');
+    const user = yield call(api.user.login, action.user);
+    localStorage.setItem('token', user.token);
+    //same as dispatch userLoggedIn action
+    yield put(userLoggedIn(user));
+  } catch (err) {
+    yield put(createUserErrors(err.response.data.error));
+  }
+}

@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 router.post("/signup", asyncHandler(signup));
 
 router.post(
-    '/signin', signIn,
+    '/signin',
     passport.authenticate('local', {
         failWithError: true,
         failureFlash: true,
