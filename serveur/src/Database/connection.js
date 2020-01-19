@@ -1,6 +1,7 @@
 import Sequelize from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
+
 const connection = new Sequelize(
     process.env.MYSQL_DATABASE,
     process.env.MYSQL_USER,

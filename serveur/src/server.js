@@ -3,6 +3,7 @@ import migration from "./Database/models";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import passport from './API/User/passport'
 
 import auth_Routes from "./API/User/auth_Routes";
 
@@ -19,7 +20,10 @@ app.use(bodyParser.json());
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Authorization, Content-Type");
-    res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+    res.header(
+        "Access-Control-Allow-Methods",
+        "POST, GET, PUT, DELETE, OPTIONS"
+    );
     next();
 });
 
@@ -28,6 +32,7 @@ app.use((req, res, next) => {
 app.use(express.static(`${process.cwd()}/public`));
 
 app.use("/api/users", auth_Routes);
+
 
 // error handler
 app.use((req, res, next) => {

@@ -16,13 +16,15 @@
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.1",
-    "dotenv": "^8.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.15.4",
     "flash": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "sequelize": "^5.8.7",
     "validate.js": "^0.13.1"
   },

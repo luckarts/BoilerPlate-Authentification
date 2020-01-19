@@ -1,7 +1,8 @@
 import {
     UsernameExist,
     EmailExist,
-    CreateUser
+    CreateUser,
+    findUserIdOrFirstname
 } from "../../Services/User/User_DB";
 import db from "../../Database/models";
 
@@ -132,4 +133,23 @@ describe("User Test", () => {
         expect(user.email).toBe(email);
         expect(user.PermissionId).toBe(PermissionId);
     });
+
+    it('should return user based on their id ', async () => {
+        const test = await Createusers();
+        const user = await findUserIdOrFirstname(test.username);
+
+        await DestroyUser(user);
+        expect(typeof user === 'object').toBe(true);
+    });
+
+    it('should throw an error because no user id was passed', async () => {
+        const user = await Createusers();
+        try {
+            await findUserIdOrFirstname();
+        } catch (e) {
+            await user.destroy({ force: true });
+            expect(e.message).toMatch('invalid argument: id');
+        }
+    });
+
 });

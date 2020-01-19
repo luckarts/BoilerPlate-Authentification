@@ -1,4 +1,7 @@
 import db from "../../Database/models";
+import Sequelize from 'sequelize';
+
+const Op = Sequelize.Op;
 
 /*
 Function checks if username already exists in database.
@@ -40,6 +43,9 @@ export async function EmailExist(email) {
 
     return null;
 }
+// Select * from email where i = 1 Limit 1
+
+
 
 // Select * from Permission where i = 1 Limit 1
 
@@ -84,6 +90,19 @@ export async function CreateUser(args) {
     });
 
     return user;
+}
+export async function findUserIdOrFirstname(params) {
+    if (!params) throw new Error('invalid argument: id');
+
+    const user = await db.User.findOne({
+        where: {
+            [Op.or]: [{ email: params }, { username: params }],
+        },
+    });
+
+    if (user) return user;
+
+    return null;
 }
 /*
 Function delete User with username as params

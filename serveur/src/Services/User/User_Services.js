@@ -1,5 +1,6 @@
-import { UsernameExist, EmailExist, CreateUser } from "./User_DB";
+import { UsernameExist, EmailExist, CreateUser, findUserIdOrFirstname } from "./User_DB";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -37,6 +38,12 @@ export async function ValidUserExist(username, email) {
 export async function CreateNewUser(args) {
     return await CreateUser(args);
 }
+
+export async function UserSearch(params) {
+
+    return await findUserIdOrFirstname(params);
+}
+
 /*
 Function create token .
  */
@@ -47,4 +54,8 @@ export function generateJWT(user) {
         },
         process.env.JWT_SECRET
     );
+}
+export function isSamePassword(requestPassword, password) {
+    return bcrypt.compareSync(requestPassword, password);
+
 }

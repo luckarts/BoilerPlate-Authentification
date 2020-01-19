@@ -57,6 +57,7 @@ Returns hash password .
         });
     }
 
+
     /* Node is single threaded + Bcrypt is slow => This will make the server unresponsive for the duration of
      the synchronous functions.  */
     // Method before create user replace crypte password
