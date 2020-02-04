@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
-import config from "../../config/config";
 import { EmailExist } from "../../Services/User/User_DB";
+import dotenv from "dotenv";
+dotenv.config();
 
 export default (req, res, next) => {
 
@@ -10,7 +11,7 @@ export default (req, res, next) => {
     if (header) token = header.split(" ")[ 1 ];
 
     if (token) {
-        jwt.verify(token, config.development.jwt_secret, (err, decoded) => {
+        jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
             if (err) {
                 res.status(401).json({ "errors": { "global": err } });
             } else {
