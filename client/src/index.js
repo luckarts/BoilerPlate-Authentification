@@ -8,8 +8,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "./store/saga/rootSaga";
-
 import Router from "./Router";
+import { fetchUserRequest, fetchCurrentUserSuccess } from './store/actions';
+
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -17,6 +18,12 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducers, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 // then run the saga
 sagaMiddleware.run(rootSaga);
+
+if (localStorage.token) {
+  store.dispatch(fetchUserRequest());
+} else {
+  store.dispatch(fetchCurrentUserSuccess());
+}
 
 // render the application
 ReactDOM.render(

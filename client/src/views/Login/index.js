@@ -2,7 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Navbar from "components/Navigation";
-import LoginForm from "components/Form/Login";
+import LoginForm from "components/Form";
+import { loginUserRequest } from "store/actions";
 import "./style.scss";
 const Login = () => {
   return (
@@ -10,7 +11,7 @@ const Login = () => {
       <Navbar />
       <div className="container">
         <h1>Login</h1>
-        <LoginForm />
+        <LoginForm createUserRequest={loginUserRequest} username password />
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { loginUserRequest } from "store/actions";
 import { validate } from "../validate";
 import "./style.scss";
-import ReduxformInput from "../ReduxformInput/ReduxformInput";
+import ReduxformInput from "../Field";
 
 const LoginForm = props => {
   const onSubmit = values => {

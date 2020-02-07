@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { createUserRequest } from "../../../store/actions/index";
 import { validate } from "../validate";
 import "./style.scss";
-import ReduxformInput from "../ReduxformInput/ReduxformInput";
+import ReduxformInput from "../Field";
 
 const RegisterForm = props => {
   const onSubmit = values => {

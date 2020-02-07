@@ -1,19 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import "./style.scss";
-class Navbars extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <nav>
-        <a href="/">Authentification</a>
-      </nav>
-    );
-  }
+import { connect } from "react-redux";
+import "./style.scss";
+const Navbar = (props) => {
+  const { isAuthenticated } = props;
+  return (
+    <nav>
+      <a href="/">Authentification</a>
+      {isAuthenticated && <a href="/edit/profile">{isAuthenticated.username}</a>}
+    </nav>
+  );
 }
 
-export default Navbars;
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.User.user,
+});
+export default connect(mapStateToProps)(Navbar);
