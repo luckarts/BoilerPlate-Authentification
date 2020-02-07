@@ -20,7 +20,16 @@ const UserProfile = ({ isAuthenticated }) => {
       <div className="container">
         <h1>My profile</h1>
         <h2>{isAuthenticated.username}</h2>
-        <UpdateUser handleOnDrop={handleOnDrop} onSubmit={onSubmit} newImage={newImage} />
+        <UpdateUser handleOnDrop={handleOnDrop}
+          onSubmit={onSubmit}
+          newImage={newImage}
+          isAuthenticated={isAuthenticated}
+          file={file}
+          username
+          password
+          email
+          img
+        />
       </div>
     </div>
   );

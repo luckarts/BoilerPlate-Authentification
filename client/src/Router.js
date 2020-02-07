@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, Router } from "react-router-dom";
 import history from "./history";
 import Register from "views/Register";
 import Login from "views/Login";
@@ -11,11 +11,11 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter history={history} >
+      <Router history={history} >
         <Route exact path="/" component={Register} />
         <Route exact path="/login" component={Login} />
         <PrivateRoutes exact path="/profile/edit" component={UserProfile} />
-      </BrowserRouter>
+      </Router>
     );
   }
 }

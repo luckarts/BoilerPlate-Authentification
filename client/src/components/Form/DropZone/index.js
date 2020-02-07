@@ -4,7 +4,7 @@ import { ImagePreview } from '../ImagePreview/ImagePreview';
 import { Placeholder } from "../Placeholder";
 
 
-const Dropzone = ({ newImage, type, name, errors, ref, handleOnDrop }, props) =>
+const Dropzone = ({ newImage, type, name, errors, handleOnDrop }, props) =>
   <DropZone
     accept="image/jpeg, image/png "
     onDrop={handleOnDrop}

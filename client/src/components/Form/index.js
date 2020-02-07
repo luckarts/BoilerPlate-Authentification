@@ -7,7 +7,7 @@ import Field from './Field';
 import Dropzone from './DropZone';
 const Form = (props) => {
 
-  const { newImage, onSubmit, img, email, username, password } = props;
+  const { newImage, onSubmit, img, email, username, password, isAuthenticated } = props;
   const { register, handleSubmit, errors } = useForm();
 
 
@@ -18,27 +18,35 @@ const Form = (props) => {
           name="username"
           type="text"
           placeholder="username"
+          value={isAuthenticated && isAuthenticated.username}
           errors={errors.username}
-          ref={register({ required: true })} />}
+          register={register}
+          required
+        />}
 
       {password && <Field
         type="password"
         name="password"
         placeholder="password"
         errors={errors.password}
-        ref={register({ required: true })} />}
+        register={register}
+        required
+      />}
+
 
       {email && <Field
         type="email"
         name="email"
         placeholder="email"
+        value={isAuthenticated && isAuthenticated.email}
         errors={errors.email}
-        ref={register({ required: true })} />}
+        register={register}
+        required
+      />}
       {img && <Dropzone
         type="file"
         name="img"
         errors={errors.img}
-        ref={register({ required: true })}
         handleOnDrop={props.handleOnDrop}
         newImage={newImage}
       />}

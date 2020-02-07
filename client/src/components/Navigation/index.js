@@ -7,7 +7,7 @@ const Navbar = (props) => {
   return (
     <nav>
       <a href="/">Authentification</a>
-      {isAuthenticated && <a href="/edit/profile">{isAuthenticated.username}</a>}
+      {isAuthenticated && <a href="/profile/edit">{isAuthenticated.username}</a>}
     </nav>
   );
 }
