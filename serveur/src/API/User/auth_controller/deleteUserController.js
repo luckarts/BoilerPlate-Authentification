@@ -1,5 +1,5 @@
 import validate from "validate.js";
-import { DeleteUserID } from "../../../Services/User/User_DB";
+import { deleteUserID } from "../../../Services/User/User_DB";
 
 export async function deleteUser(req, res) {
     const contraints = {
@@ -18,6 +18,6 @@ export async function deleteUser(req, res) {
         return res.status(400).json({ "error": validation });
     }
 
-    await DeleteUserID(username);
+    await deleteUserID(username);
     return res.status(200).json({ "message": "User has been delete!" });
 }

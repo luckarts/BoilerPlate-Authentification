@@ -1,12 +1,12 @@
 import {
-    UsernameExist,
-    EmailExist,
-    CreateUser,
+    usernameExist,
+    emailExist,
+    createUser,
     findUserIdOrFirstname
 } from "../../Services/User/User_DB";
 import db from "../../Database/models";
 
-async function Createusers() {
+async function createusers() {
     return await db.User.create({
         "username": "test",
         "password": "test",
@@ -21,13 +21,13 @@ async function DestroyUser(user) {
 describe("User Test", () => {
     /* Username test*/
     it("should see if username already exist in DB", async () => {
-        const check = await UsernameExist("");
+        const check = await usernameExist("");
 
         expect(check).toBe(null);
     });
     it("Throw an error because no username was passed", async () => {
         try {
-            const check = await UsernameExist("");
+            const check = await usernameExist("");
 
             expect(check).toBe(null);
         } catch (e) {
@@ -36,22 +36,22 @@ describe("User Test", () => {
     });
 
     it("should see if user already exist and fail", async () => {
-        const check = await UsernameExist("test");
+        const check = await usernameExist("test");
 
         expect(typeof check === "object").toBe(true);
-        const test = await Createusers();
+        const test = await createusers();
 
         await DestroyUser(test);
     });
     /* Email test*/
     it("should see if email already exist in DB", async () => {
-        const check = await EmailExist("");
+        const check = await emailExist("");
 
         expect(check).toBe(null);
     });
     it("Throw an error because no email was passed", async () => {
         try {
-            const check = await EmailExist();
+            const check = await emailExist();
 
             expect(check).toBe(null);
         } catch (e) {
@@ -59,8 +59,8 @@ describe("User Test", () => {
         }
     });
     it("should see if  email already exist and fail", async () => {
-        const check = await EmailExist("test@test.com");
-        const test = await Createusers();
+        const check = await emailExist("test@test.com");
+        const test = await createusers();
 
         await DestroyUser(test);
         expect(typeof check === "object").toBe(true);
@@ -74,7 +74,7 @@ describe("User Test", () => {
         const PermissionId = 1;
 
         const arg = { username, password, email, PermissionId };
-        const user = await CreateUser(arg);
+        const user = await createUser(arg);
 
         await DestroyUser(user);
         expect(typeof user === "object").toBe(true);
@@ -88,7 +88,7 @@ describe("User Test", () => {
             const password = "test";
             const email = "test@test.com";
             const PermissionId = 1;
-            const user = await CreateUser({ password, email, PermissionId });
+            const user = await createUser({ password, email, PermissionId });
 
             await user.destroy({ "force": true });
         } catch (e) {
@@ -102,7 +102,7 @@ describe("User Test", () => {
             const password = "test";
             const email = "test@test.com";
             const PermissionId = "erff";
-            const user = await CreateUser({
+            const user = await createUser({
                 username,
                 password,
                 email,
@@ -119,7 +119,7 @@ describe("User Test", () => {
         const password = "test";
         const email = "test@test.com";
         const PermissionId = 1;
-        const user = await CreateUser({
+        const user = await createUser({
             username,
             password,
             email,
@@ -135,7 +135,7 @@ describe("User Test", () => {
     });
 
     it('should return user based on their id ', async () => {
-        const test = await Createusers();
+        const test = await createusers();
         const user = await findUserIdOrFirstname(test.username);
 
         await DestroyUser(user);
@@ -143,7 +143,7 @@ describe("User Test", () => {
     });
 
     it('should throw an error because no user id was passed', async () => {
-        const user = await Createusers();
+        const user = await createusers();
         try {
             await findUserIdOrFirstname();
         } catch (e) {

@@ -1,5 +1,5 @@
 import validate from "validate.js";
-import { ValidUserExist, CreateNewUser, generateJWT } from "../../../Services/User/User_Services";
+import { validUserExist, createNewUser, generateJWT } from "../../../Services/User/User_Services";
 export async function signup(req, res) {
     const contraints = {
         "username": {
@@ -31,9 +31,9 @@ Return message Error if object is empty or specification are not valid
     }
 
     /*
-If Validation is true Call ValidUserExist if user already exist
+If Validation is true Call validUserExist if user already exist
  */
-    const found_User = await ValidUserExist(username, email);
+    const found_User = await validUserExist(username, email);
 
     if (found_User) {
         if (email === found_User.email) {
@@ -53,7 +53,7 @@ If user did'nt exist create user
 Return user with hash password and jwt
  */
     const token = generateJWT(req.body);
-    const new_User = await CreateNewUser({
+    const new_User = await createNewUser({
         username,
         password,
         email,

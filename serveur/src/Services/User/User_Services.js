@@ -1,4 +1,4 @@
-import { UsernameExist, EmailExist, CreateUser, findUserIdOrFirstname } from "./User_DB";
+import { usernameExist, emailExist, createUser, findUserIdOrFirstname } from "./User_DB";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
@@ -9,7 +9,7 @@ Function checks if Email user already exists in database.
 Returns user if this user already exist.
  */
 
-export async function ValidUserExist(username, email) {
+export async function validUserExist(username, email) {
     if (!username) {
         throw new Error("username is empty");
     }
@@ -20,10 +20,10 @@ export async function ValidUserExist(username, email) {
     let taken_email = null;
 
     if (username) {
-        taken_username = await UsernameExist(username);
+        taken_username = await usernameExist(username);
     }
     if (email) {
-        taken_email = await EmailExist(email);
+        taken_email = await emailExist(email);
     }
     if (taken_username) {
         return taken_username;
@@ -35,11 +35,11 @@ export async function ValidUserExist(username, email) {
     return null;
 }
 
-export async function CreateNewUser(args) {
-    return await CreateUser(args);
+export async function createNewUser(args) {
+    return await createUser(args);
 }
 
-export async function UserSearch(params) {
+export async function userSearch(params) {
 
     return await findUserIdOrFirstname(params);
 }

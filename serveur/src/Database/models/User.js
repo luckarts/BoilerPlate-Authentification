@@ -32,6 +32,8 @@ export default (connection, DataTypes) => {
     // Will also add PermissionID to User model
     User.associate = (models) => {
         User.belongsTo(models.Permission);
+        User.hasMany(models.UserImg);
+
     };
 
     /*
@@ -40,6 +42,7 @@ Returns hash password .
  */
 
     function cryptPassword(password) {
+
         return new Promise((resolve, reject) => {
             bcrypt.genSalt(10, (err) => {
                 // Encrypt password using bycrpt module
@@ -62,8 +65,11 @@ Returns hash password .
      the synchronous functions.  */
     // Method before create user replace crypte password
 
+
     if (process.env.NODE_ENV !== "test") {
+
         User.addHook("beforeCreate", (user) => {
+            console.log(user, 'hhoks');
             return cryptPassword(user.dataValues.password)
                 .then((success) => {
                     user.password = success;
@@ -74,7 +80,20 @@ Returns hash password .
                     }
                 });
         });
+
     }
+    User.addHook("beforeBulkUpdate", (user) => {
+
+        return cryptPassword(user.attributes.password)
+            .then((success) => {
+                user.attributes.password = success;
+            })
+            .catch((err) => {
+                if (err) {
+                    console.log(err);
+                }
+            });
+    });
 
     return User;
 };

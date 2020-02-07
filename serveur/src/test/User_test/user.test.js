@@ -1,7 +1,7 @@
-import { ValidUserExist } from "../../Services/User/User_Services";
+import { validUserExist } from "../../Services/User/User_Services";
 import db from "../../Database/models";
 
-async function CreateUser() {
+async function createUser() {
     return await db.User.create({
         "username": "test",
         "password": "test",
@@ -9,29 +9,29 @@ async function CreateUser() {
         "PermissionId": 1
     });
 }
-async function DestroyUser(user) {
+async function destroyUser(user) {
     user.destroy({ "where": {}, "force": true });
 }
 
 describe("User Test", () => {
     it("should see if user already exist with valid email", async () => {
-        const user = await ValidUserExist("test", "test@test.com");
+        const user = await validUserExist("test", "test@test.com");
 
         expect(user).toBe(null);
     });
     it("should see if user already exist and fail", async () => {
-        const test = await CreateUser();
-        const check = await ValidUserExist("test", "test@test.com");
+        const test = await createUser();
+        const check = await validUserExist("test", "test@test.com");
 
-        await DestroyUser(test);
+        await destroyUser(test);
         expect(typeof check === "object").toBe(true);
     });
     it("should throw an error because", async () => {
         try {
-            const check = await ValidUserExist();
-            const test = await CreateUser();
+            const check = await validUserExist();
+            const test = await createUser();
 
-            await DestroyUser(test);
+            await destroyUser(test);
             expect(typeof check === "object").toBe(true);
         } catch (e) {
             expect(e.message).toMatch("username is empty");

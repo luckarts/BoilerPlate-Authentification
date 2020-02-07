@@ -1,4 +1,4 @@
-import { UserSearch } from "../../Services/User/User_Services";
+import { userSearch } from "../../Services/User/User_Services";
 import bcrypt from "bcrypt";
 
 
@@ -6,8 +6,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
 passport.use(
-    new LocalStrategy(function (username, password, done) {
-        UserSearch(username)
+    new LocalStrategy((username, password, done) => {
+
+        userSearch(username)
             .then((user, err) => {
                 if (err) {
                     return done((err = { "username": 'username incorrect' }));
@@ -16,7 +17,7 @@ passport.use(
                     return done((err = { "username": 'username incorrect' }));
                 }
 
-                bcrypt.compare(password, user.password).then(match => {
+                bcrypt.compare(password, user.password).then((match) => {
                     if (match) {
                         return done(null, user);
                     }

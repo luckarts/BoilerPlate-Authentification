@@ -26,7 +26,6 @@ const UserProfile = ({ isAuthenticated }) => {
           isAuthenticated={isAuthenticated}
           file={file}
           username
-          password
           email
           img
         />
