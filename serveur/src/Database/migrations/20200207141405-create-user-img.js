@@ -11,9 +11,7 @@ module.exports = {
 			path: {
 				type: Sequelize.STRING
 			},
-			"userId": {
-				"type": Sequelize.INTEGER
-			}
+
 		});
 	},
 	down: (queryInterface, Sequelize) => {

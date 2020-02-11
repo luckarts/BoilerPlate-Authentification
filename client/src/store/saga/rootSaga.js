@@ -1,6 +1,7 @@
 import { takeLatest } from 'redux-saga/effects';
-import { CREATE_USER_REQUEST, LOGIN_USER_REQUEST, FETCH_CURRENT_USER_REQUEST } from '../actions/ActionTypes';
-import { createUserSaga, loginUserSaga, fetchUserSaga } from './userSaga';
+import { CREATE_USER_REQUEST, LOGIN_USER_REQUEST, FETCH_CURRENT_USER_REQUEST, UPDATE_USER_REQUEST } from '../actions/ActionTypes';
+import { createUserSaga, loginUserSaga, fetchUserSaga, updateUserRequest } from './userSaga';
+
 
 export default function* rootSaga() {
   /*
@@ -11,4 +12,5 @@ export default function* rootSaga() {
 
   yield takeLatest(LOGIN_USER_REQUEST, loginUserSaga);
   yield takeLatest(FETCH_CURRENT_USER_REQUEST, fetchUserSaga);
+  yield takeLatest(UPDATE_USER_REQUEST, updateUserRequest);
 }

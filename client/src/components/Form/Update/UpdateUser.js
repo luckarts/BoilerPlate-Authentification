@@ -20,18 +20,12 @@ const Form = (props) => {
         errors={errors.username}
         ref={register({ required: true })} />
 
+
       <Field
         type="password"
         name="password"
         placeholder="password"
         errors={errors.password}
-        ref={register({ required: true })} />
-
-      <Field
-        type="email"
-        name="email"
-        placeholder="email"
-        errors={errors.email}
         ref={register({ required: true })} />
 
       <Dropzone

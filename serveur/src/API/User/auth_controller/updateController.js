@@ -5,10 +5,8 @@ import bcrypt from "bcrypt";
 
 export async function update_User(req, res) {
     const id = req.params.id;
-    const { oldUsername, username, email, password, newPassword, confirmPassword } = req.body;
-    let img = req.file;
+    const { oldUsername, username, email, password, newPassword, confirmPassword, newImage } = req.body;
 
-    if (req.file) img = req.file.path;
 
     if (password && newPassword && confirmPassword) {
 
@@ -27,8 +25,9 @@ export async function update_User(req, res) {
 
         }
     }
-    if (email || img || username) {
-        await updateUser({ id, username, email, img });
+    if (email || newImage || username) {
+        console.log(newImage);
+        await updateUser({ id, username, email, newImage });
         return res.status(200).json({ "message": "User has been update" });
     }
     return null;

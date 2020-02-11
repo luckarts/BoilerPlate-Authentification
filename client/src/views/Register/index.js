@@ -5,6 +5,12 @@ import Navbar from "components/Navigation";
 import RegisterForm from "components/Form/";
 import { createUserRequest } from "../../store/actions/index";
 import "./style.scss";
+
+const initialState = {
+  username: '',
+  email: '',
+  password: '',
+};
 const Register = (props) => {
 
   const onSubmit = values => {
@@ -16,7 +22,7 @@ const Register = (props) => {
       <Navbar />
       <div className="container">
         <h1>Register</h1>
-        <RegisterForm email username password onSubmit={onSubmit} />
+        <RegisterForm initialState={initialState} onSubmit={onSubmit} required />
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { deleteUser } from "./auth_controller/deleteUserController";
 import passport from "passport";
 import authenticate from "./authenticate";
 import { generateJWT } from "../../Services/User/User_Services";
-
+import { upload } from "../../helpers/multer.js";
 const router = express.Router();
 
 
@@ -43,7 +43,7 @@ router.post(
 );
 
 router.put("/update/:id", asyncHandler(update_User));
-router.put("/update/password/:id", asyncHandler(update_Password));
+router.put("/update/password/:id", upload, asyncHandler(update_Password));
 
 router.delete("/delete/:username", asyncHandler(deleteUser));
 

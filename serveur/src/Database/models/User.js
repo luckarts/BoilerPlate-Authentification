@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import db from "../models";
 const Salt_Factor = 10;
 
 export default (connection, DataTypes) => {
@@ -69,7 +70,7 @@ Returns hash password .
     if (process.env.NODE_ENV !== "test") {
 
         User.addHook("beforeCreate", (user) => {
-            console.log(user, 'hhoks');
+
             return cryptPassword(user.dataValues.password)
                 .then((success) => {
                     user.password = success;
@@ -82,18 +83,21 @@ Returns hash password .
         });
 
     }
-    User.addHook("beforeBulkUpdate", (user) => {
 
-        return cryptPassword(user.attributes.password)
-            .then((success) => {
-                user.attributes.password = success;
-            })
-            .catch((err) => {
-                if (err) {
-                    console.log(err);
-                }
-            });
+
+    User.addHook("beforeBulkUpdate", (user) => {
+        if (user.attributes.password) {
+            return cryptPassword(user.attributes.password)
+                .then((success) => {
+                    user.attributes.password = success;
+                })
+                .catch((err) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                });
+        }
     });
 
     return User;
-};
+}

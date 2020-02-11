@@ -15,15 +15,17 @@ fs.readdirSync(__dirname)
     .forEach((file) => {
         const model = connection.import(path.join(__dirname, file));
 
-        db[ model.name ] = model;
+        db[model.name] = model;
     });
 
 Object.keys(db).forEach((modelName) => {
-    if (db[ modelName ].associate) {
-        db[ modelName ].associate(db);
+    if (db[modelName].associate) {
+        db[modelName].associate(db);
     }
 });
-
+db.User.addHook("afterCreate", (user) => {
+    db.UserImg.create({});
+});
 db.connection = connection;
 db.connection = connection;
 

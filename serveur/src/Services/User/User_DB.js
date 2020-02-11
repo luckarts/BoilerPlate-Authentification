@@ -121,18 +121,8 @@ export async function deleteUserID(username) {
 }
 
 export async function updateUser(args) {
-    if (!args.username && !args.email && !args.img && !args.password)
-        throw new Error("invalid argument");
-
-    if (args.password && !args.newPassword)
-        throw new Error("please enter new password");
-
-    if (args.password && args.newPassword && !args.confirmPassword)
-        throw new Error("please confirm  new password");
-    if (args.img) {
-        const path = args.img.path;
-
-        await db.File({ path }, { "returning": true, "where": { "id": args.id } });
+    if (args.newImage) {
+        await db.UserImg.update({ path: args.newImage }, { "returning": true, "where": { "id": args.id } })
     }
     const user = await db.User.update({
         "username": args.username,
