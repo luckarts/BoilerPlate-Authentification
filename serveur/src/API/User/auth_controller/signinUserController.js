@@ -1,25 +1,9 @@
-import validate from "validate.js";
 
+import passport from "passport";
 
-export function signIn(req, res, next) {
-    const contraints = {
-        "username": {
-            "presence": {
-                "message": "Veuillez saisir votre pseudo"
-            }
-        },
-        "password": {
-            "presence": {
-                "message": "Ce mot de passe est trop court"
-            }
-        }
-    };
-	/* if (req.isAuthenticated()) {
-		localStorage.clear();
-	} */
-    const { password, username } = req.body;
-    const validation = validate({ password, username }, contraints);
+export async function signIn(req, res, next) {
 
-    if (validation) return res.status(400).json({ error: validation });
-    next();
+    passport.authenticate("local", {
+        "session": false
+    });
 }

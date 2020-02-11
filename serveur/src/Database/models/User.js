@@ -33,7 +33,7 @@ export default (connection, DataTypes) => {
     // Will also add PermissionID to User model
     User.associate = (models) => {
         User.belongsTo(models.Permission);
-        User.hasMany(models.UserImg);
+
 
     };
 

@@ -5,7 +5,9 @@ form {
 
 label {
     display: block;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    color: grey;
+    padding: 10px 0;
 }
 
 span {
@@ -23,6 +25,7 @@ input {
     border-radius: 5px;
     border-color: #d6d6d6;
     transition: border-bottom-color 0.25s ease-in;
+
 
     &:focus {
         border-bottom-color: #e5195f;

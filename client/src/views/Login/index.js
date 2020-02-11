@@ -11,16 +11,25 @@ const initialState = {
   password: '',
 };
 
-const Login = () => {
+const Login = (props) => {
+
+  const onSubmit = values => {
+    props.loginUserRequest(values);
+
+  };
+
   return (
     <div>
       <Navbar />
       <div className="container">
         <h1>Login</h1>
-        <LoginForm createUserRequest={loginUserRequest} initialState={initialState} />
+        <LoginForm initialState={initialState} onSubmit={onSubmit} required />
       </div>
     </div>
   );
 };
+const mapStateToProps = (state) => ({
 
-export default connect()(Login);
+});
+
+export default connect(mapStateToProps, { loginUserRequest })(Login);

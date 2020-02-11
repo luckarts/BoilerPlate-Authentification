@@ -5,18 +5,23 @@ const Field = field => {
 
   return (
     <div className={className}>
+      <label>{field.label}</label>
       <input
         name={field.name}
         type={field.type}
+        autoFocus={field.autoFocus}
         value={field.value ? field.value : ""}
         autoComplete={field.autoComplete}
         {...field.input}
-        placeholder={field.placeholder}
+
         onChange={field.onChange}
         ref={field.register({ required: field.required })}
 
       />
+      {field.error && <span>{field.error}</span>}
+      {field.error && field.errors && <span> & </span>}
       {field.errors && field.errors.type === 'required' && <span>This is required</span>}
+
     </div>
 
   );

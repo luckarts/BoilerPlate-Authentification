@@ -7,7 +7,8 @@ const Navbar = (props) => {
   return (
     <nav>
       <a href="/">Authentification</a>
-      {isAuthenticated && <a href="/profile/edit">{isAuthenticated.username}</a>}
+
+      {isAuthenticated && <a href="/profile/edit" className="profileIcon"> <img src={isAuthenticated.img && '/images/' + isAuthenticated.img.path} /></a>}
     </nav>
   );
 }

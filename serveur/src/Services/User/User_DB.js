@@ -22,6 +22,19 @@ export async function usernameExist(username) {
 
     return null;
 }
+export async function findUserImg(id) {
+
+
+    const userImg = await db.UserImg.findOne({
+        "where": { id }
+    });
+
+    if (userImg) {
+        return userImg;
+    }
+
+    return null;
+}
 
 /*
 Function checks if Email already exists in database.

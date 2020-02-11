@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { emailExist } from "../../Services/User/User_DB";
+import { emailExist, findUserImg } from "../../Services/User/User_DB";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -16,9 +16,13 @@ export default (req, res, next) => {
                 res.status(401).json({ "errors": { "global": err } });
             } else {
                 emailExist(decoded.user.email).then((user) => {
-                    req.user = user.dataValues;
+                    findUserImg(decoded.user.id).then((userImg) => {
+                        user.dataValues.img = userImg;
+                        req.user = user.dataValues;
 
-                    next();
+                        next();
+                    });
+
                 });
             }
         });

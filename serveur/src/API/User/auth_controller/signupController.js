@@ -1,6 +1,7 @@
 import validate from "validate.js";
 import { validUserExist, createNewUser, generateJWT } from "../../../Services/User/User_Services";
 export async function signup(req, res) {
+
     const contraints = {
         "username": {
             "presence": {
@@ -39,12 +40,12 @@ If Validation is true Call validUserExist if user already exist
         if (email === found_User.email) {
             return res
                 .status(400)
-                .json({ "error": { "email": [`${email}  already taken`] } });
+                .json({ "error": { "email": `${email}  already taken` } });
         }
         if (username === found_User.username) {
             return res
                 .status(400)
-                .json({ "error": { "username": [`${username} already taken`] } });
+                .json({ "error": { "username": `${username} already taken` } });
         }
     }
 

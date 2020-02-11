@@ -22,12 +22,13 @@ const UserProfile = ({ isAuthenticated, updateUserRequest }) => {
   });
 
   const onSubmit = values => {
-    values.newImage = 'images/' + values.newImage[0].name;
+    values.newImage = values.newImage[0].name;
     values.oldUsername = isAuthenticated.username;
     values.id = isAuthenticated.id;
     updateUserRequest(values);
 
   };
+
   return (
     <div>
       <Navbar />
@@ -35,8 +36,9 @@ const UserProfile = ({ isAuthenticated, updateUserRequest }) => {
 
         <div className="profile">
           <h1>My profile</h1>
-          <img src="blob:http://localhost:3000/bf6c49e5-7510-4ff6-af73-3ed6d5d867ad" />
-          <h2>{isAuthenticated.username}</h2>
+          <img src={isAuthenticated.img && '/images/' + isAuthenticated.img.path} />
+
+          <h2>{isAuthenticated && isAuthenticated.username}</h2>
         </div>
 
 
@@ -52,6 +54,7 @@ const UserProfile = ({ isAuthenticated, updateUserRequest }) => {
 };
 const mapStateToProps = (state) => ({
   isAuthenticated: state.User.user,
+  serverErrors: state.formErrors.errors
 });
 export default connect(mapStateToProps, { updateUserRequest })(UserProfile);
 

@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { createUserRequest } from "../../store/actions/index";
 import { connect } from "react-redux";
@@ -14,6 +14,11 @@ const Form = (props) => {
 
   const { onSubmit, initialState, required, isAuthenticated } = props;
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [errorServer, setErrors] = useState({});
+
+  useEffect(() => {
+    setErrors({ errors: props.serverErrors });
+  }, [props.serverErrors]);
 
   const onChange = (e) => {
     dispatch({ field: e.target.name, value: e.target.value });
@@ -38,7 +43,9 @@ const Form = (props) => {
     newPassword,
     confirmPassword,
     newImage, } = state;
-  const { register, handleSubmit, errors } = useForm();
+  let { register, handleSubmit, errors } = useForm();
+
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} >
@@ -46,9 +53,11 @@ const Form = (props) => {
       {username !== undefined && <Field
         name="username"
         type="text"
-        placeholder="username"
+        label="Username"
         value={username}
         errors={errors.username}
+        autoFocus
+        error={errorServer.errors && errorServer.errors.username}
         register={register}
         onChange={onChange}
         required={required}
@@ -56,9 +65,10 @@ const Form = (props) => {
       {email !== undefined && <Field
         type="email"
         name="email"
-        placeholder="email"
+        label="Email"
         value={email}
         errors={errors.email}
+        error={errorServer.errors && errorServer.errors.email}
         register={register}
         onChange={onChange}
         required={required}
@@ -67,8 +77,9 @@ const Form = (props) => {
       {password !== undefined && <Field
         type="password"
         name="password"
-        placeholder="password"
+        label="Password"
         value={password}
+        error={errorServer.errors && errorServer.errors.password}
         errors={errors.password}
         register={register}
         onChange={onChange}
@@ -77,7 +88,7 @@ const Form = (props) => {
       {newPassword !== undefined && <Field
         type="password"
         name="newPassword"
-        placeholder="newPassword"
+        label="NewPassword"
         value={newPassword}
         errors={errors.newPassword}
         register={register}
@@ -89,7 +100,7 @@ const Form = (props) => {
         type="password"
         name="confirmPassword"
         value={confirmPassword}
-        placeholder="password"
+        label="confirmPassword"
         errors={errors.confirmPassword}
         register={register}
         onChange={onChange}
@@ -114,6 +125,6 @@ const Form = (props) => {
 
 };
 const mapStateToProps = (state) => ({
-  errors: state.formErrors
+  serverErrors: state.formErrors.errors
 });
 export default connect(mapStateToProps, { createUserRequest })(Form);

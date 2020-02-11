@@ -41,7 +41,10 @@ export async function createNewUser(args) {
 
 export async function userSearch(params) {
 
-    return await findUserIdOrFirstname(params);
+    const findUser = await findUserIdOrFirstname(params);
+
+    if (findUser) return findUser;
+    return null;
 }
 
 /*

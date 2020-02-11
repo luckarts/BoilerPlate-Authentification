@@ -12,9 +12,9 @@ export const createUserErrors = errors => ({
   type: CREATE_USER_ERRORS,
   errors,
 });
-export const loginUserRequest = errors => ({
+export const loginUserRequest = user => ({
   type: LOGIN_USER_REQUEST,
-  errors,
+  user,
 });
 
 export const fetchUserRequest = user => ({
