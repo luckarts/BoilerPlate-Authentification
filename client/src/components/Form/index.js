@@ -111,7 +111,7 @@ const Form = (props) => {
 
       {newImage !== undefined && <Dropzone
         type="file"
-        name="newImage"
+        name="path"
         register={register}
         errors={errors.newImage}
         handleOnDrop={handleOnDrop}

@@ -19,6 +19,7 @@ export function* createUserSaga(action) {
     yield put(createUserErrors(err.response.data.error));
   }
 }
+
 export function* fetchUserSaga() {
 
   const user = yield call(api.user.fetchCurrentUser, headers);
@@ -39,7 +40,7 @@ export function* loginUserSaga(action) {
 }
 export function* updateUserRequest(action) {
   try {
-    const user = yield call(api.user.update, action.user);
+    const user = yield call(api.user.update, action);
     yield put(userLoggedIn(user));
     const fetchUser = yield call(api.user.fetchCurrentUser, headers);
     yield put(userLoggedIn(fetchUser));

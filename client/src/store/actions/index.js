@@ -1,4 +1,4 @@
-import { CREATE_USER_REQUEST, CREATE_USER_ERRORS, LOGIN_USER_REQUEST, UPDATE_USER_REQUEST, FETCH_CURRENT_USER_REQUEST, FETCH_CURRENT_USER_SUCCESS } from './ActionTypes';
+import { CREATE_IMG_REQUEST, CREATE_USER_REQUEST, CREATE_USER_ERRORS, LOGIN_USER_REQUEST, UPDATE_USER_REQUEST, FETCH_CURRENT_USER_REQUEST, FETCH_CURRENT_USER_SUCCESS } from './ActionTypes';
 
 /*
 Send to Action, and User to Saga
@@ -25,9 +25,10 @@ export const fetchCurrentUserSuccess = user => ({
   type: FETCH_CURRENT_USER_SUCCESS,
   user,
 });
-export const updateUserRequest = user => ({
+export const updateUserRequest = (formdata, id) => ({
   type: UPDATE_USER_REQUEST,
-  user,
+  formdata, id
 });
+
 
 

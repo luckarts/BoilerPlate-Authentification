@@ -22,11 +22,12 @@ const UserProfile = ({ isAuthenticated, updateUserRequest }) => {
   });
 
   const onSubmit = values => {
-    values.newImage = values.newImage[0].name;
-    values.oldUsername = isAuthenticated.username;
-    values.id = isAuthenticated.id;
-    updateUserRequest(values);
-
+    let formdata = new FormData();
+    for (let key in values) {
+      formdata.append(key, values[key]);
+    }
+    formdata.append("path", values.path[0]);
+    updateUserRequest(formdata, isAuthenticated.id);
   };
 
   return (

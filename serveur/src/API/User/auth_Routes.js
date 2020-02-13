@@ -1,7 +1,7 @@
 import express from "express";
 import { asyncHandler } from "../../helpers/asyncHandler";
 import { signup } from "./auth_controller/signupController";
-import { update_User, update_Password } from "./auth_controller/updateController";
+import { update_User, update_Password, create_Img, update_Img } from "./auth_controller/updateController";
 import { deleteUser } from "./auth_controller/deleteUserController";
 import passport from "passport";
 import authenticate from "./authenticate";
@@ -19,11 +19,12 @@ router.get("/me", authenticate, (req, res) => {
     try {
         res.json(req.user);
     } catch (e) {
-        res.status(500).json({ "flash": "signUp failed" });
+        res.status(500).json({ "error": "signUp failed" });
     }
 });
 
 router.post("/signup", asyncHandler(signup));
+router.post("/img", upload, asyncHandler(create_Img));
 
 router.post(
     "/signin",
@@ -39,7 +40,8 @@ router.post(
     },
 );
 
-router.put("/update/:id", asyncHandler(update_User));
+router.put("/update/:id", upload, asyncHandler(update_User));
+router.put("/update/img/:id", upload, asyncHandler(update_Img));
 router.put("/update/password/:id", upload, asyncHandler(update_Password));
 
 router.delete("/delete/:username", asyncHandler(deleteUser));

@@ -134,8 +134,9 @@ export async function deleteUserID(username) {
 }
 
 export async function updateUser(args) {
-    if (args.newImage) {
-        await db.UserImg.update({ path: args.newImage }, { "returning": true, "where": { "id": args.id } })
+
+    if (args.path) {
+        await db.UserImg.update({ path: args.path }, { "returning": true, "where": { "id": args.id } })
     }
     const user = await db.User.update({
         "username": args.username,
@@ -159,4 +160,19 @@ export async function updatePassword(args) {
     }, { "returning": true, "where": { "id": args.id } });
 
     return user;
+}
+export async function createImg(arg) {
+    const img = db.UserImg.create({
+        path: arg.img,
+    });
+    if (img) return img;
+    return null;
+}
+export async function updateImg(args) {
+
+    const img = db.UserImg.update({
+        path: args.img,
+    }, { "returning": true, "where": { "id": args.id } });
+    if (img) return img;
+    return null;
 }
